@@ -5,6 +5,11 @@ const { ActivityTypes } = require('botbuilder');
 const { ComponentDialog } = require('botbuilder-dialogs');
 
 class LogoutDialog extends ComponentDialog {
+    constructor(id, connectionName) {
+        super(id);
+        this.connectionName = connectionName;
+    }
+
     async onBeginDialog(innerDc, options) {
         const result = await this.interrupt(innerDc);
         if (result) {

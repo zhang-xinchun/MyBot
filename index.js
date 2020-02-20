@@ -8,7 +8,8 @@ const path = require('path');
 // See https://aka.ms/bot-services to learn more about the different parts of a bot.
 const { BotFrameworkAdapter, ConversationState, MemoryStorage, UserState } = require('botbuilder');
 
-const { AuthBot } = require('./bots/authBot');
+// const { AuthBot } = require('./bots/authBot');
+const { TeamsBot } = require('./bots/teamsBot');
 const { MainDialog } = require('./dialogs/mainDialog');
 
 // Note: Ensure you have a .env file and include MicrosoftAppId and MicrosoftAppPassword.
@@ -56,7 +57,7 @@ const userState = new UserState(memoryStorage);
 
 const dialog = new MainDialog();
 
-const bot = new AuthBot(conversationState, userState, dialog);
+const bot = new TeamsBot(conversationState, userState, dialog);
 
 // Create HTTP server.
 const server = restify.createServer();
