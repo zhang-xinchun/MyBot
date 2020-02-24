@@ -104,17 +104,21 @@ class SimpleGraphClient {
     }
 
     async getSchedule() {
+        let startDate = new Date();
+        let endDate = new Date();
+        startDate.setDate(startDate.getDate()-1);
+        endDate.setDate(endDate.getDate() + 1);
         return await this.graphClient
             .api('/me/calendar/getSchedule')
             .version('beta')
             .post({
                 schedules: ['zhang_xinchun@pactera.com'],
                 startTime: {
-                    dateTime: '2019-10-15T09:00:00',
+                    dateTime: startDate.toJSON(),
                     timeZone: 'Pacific Standard Time'
                 },
                 endTime: {
-                    dateTime: '2019-12-15T18:00:00',
+                    dateTime: endDate.toJSON(),
                     timeZone: 'Pacific Standard Time'
                 },
                 availabilityViewInterval: 60
