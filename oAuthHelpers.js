@@ -45,8 +45,8 @@ class OAuthHelpers {
         }
 
         const client = new SimpleGraphClient(tokenResponse.token);
-        const schedule = await client.getSchedule();
-        await context.sendActivity(`Schedule information : ${ schedule }`);
+        await client.getSchedule();
+        await context.sendActivity(`Schedule information ${ 'aaa' }`);
     }
 
     /**
