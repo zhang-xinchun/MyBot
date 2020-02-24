@@ -45,8 +45,8 @@ class OAuthHelpers {
         }
 
         const client = new SimpleGraphClient(tokenResponse.token);
-        var schedule = await client.getSchedule() || 'None';
-        await context.sendActivity(`Schedule information ${ schedule }`);
+        var schedule = await client.getSchedule() || '';
+        await context.sendActivity(`Schedule information: ${ JSON.stringify(schedule) }`);
     }
 
     static async getFindRooms(context, tokenResponse) {
@@ -58,9 +58,9 @@ class OAuthHelpers {
         }
         // Pull in the data from Microsoft Graph.
         const client = new SimpleGraphClient(tokenResponse.token);
-        const findRooms = await client.getFindRooms() || 'None';
+        const findRooms = await client.getFindRooms() || '';
 
-        await context.sendActivity(`find rooms ${ findRooms }`);
+        await context.sendActivity(`find rooms: ${ JSON.stringify(findRooms) }`);
     }
 
     /**
