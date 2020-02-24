@@ -104,9 +104,9 @@ class SimpleGraphClient {
     }
 
     async getSchedule() {
-        let startDate = new Date();
-        let endDate = new Date();
-        startDate.setDate(startDate.getDate());
+        const startDate = new Date();
+        const endDate = new Date();
+        startDate.setDate(startDate.getDate() - 1);
         endDate.setDate(endDate.getDate() + 2);
         return await this.graphClient
             .api('/me/calendar/getSchedule')
@@ -131,6 +131,14 @@ class SimpleGraphClient {
             });
     }
 
+    async getFindRooms() {
+        return await this.graphClient
+            .api('/me/findRooms')
+            .version('beta')
+            .get().then((res) => {
+                return res;
+            });
+    }
 }
 
 exports.SimpleGraphClient = SimpleGraphClient;

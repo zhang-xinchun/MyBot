@@ -30,7 +30,7 @@ class OAuthHelpers {
 
         await client.sendMail(
             emailAddress,
-            `Message from a bot!`,
+            'Message from a bot!',
             `Hi there! I had this message sent from a bot. - Your friend, ${ me.displayName }`
         );
         await context.sendActivity(`I sent a message to ${ emailAddress } from your account.`);
@@ -49,6 +49,20 @@ class OAuthHelpers {
         await context.sendActivity(`Schedule information ${ schedule }`);
     }
 
+    static async getFindRooms(context, tokenResponse) {
+        if (!context) {
+            throw new Error('OAuthHelpers.getFindRooms(): `context` cannot be undefined.');
+        }
+        if (!tokenResponse) {
+            throw new Error('OAuthHelpers.getFindRooms(): `tokenResponse` cannot be undefined.');
+        }
+        // Pull in the data from Microsoft Graph.
+        const client = new SimpleGraphClient(tokenResponse.token);
+        const findRooms = await client.getFindRooms();
+
+        await context.sendActivity(`find rooms ${ findRooms }`);
+    }
+
     /**
      * Displays information about the user in the bot.
      * @param {TurnContext} context A TurnContext instance containing all the data needed for processing this conversation turn.
@@ -61,16 +75,12 @@ class OAuthHelpers {
         if (!tokenResponse) {
             throw new Error('OAuthHelpers.listMe(): `tokenResponse` cannot be undefined.');
         }
-        try {
-            // Pull in the data from Microsoft Graph.
-            const client = new SimpleGraphClient(tokenResponse.token);
-            const me = await client.getMe();
-            const manager = await client.getManager();
+        // Pull in the data from Microsoft Graph.
+        const client = new SimpleGraphClient(tokenResponse.token);
+        const me = await client.getMe();
+        const manager = await client.getManager();
 
-            await context.sendActivity(`You are ${ me.displayName } and you report to ${ manager.displayName }.`);
-        } catch (error) {
-            throw error;
-        }
+        await context.sendActivity(`You are ${ me.displayName } and you report to ${ manager.displayName }.`);
     }
 
     /**
