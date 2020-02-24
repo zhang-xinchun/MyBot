@@ -104,8 +104,8 @@ class SimpleGraphClient {
     }
 
     async getSchedule() {
-        let startDate = new Date();
-        let endDate = new Date();
+        // let startDate = new Date();
+        // let endDate = new Date();
         // startDate.setDate(startDate.getDate());
         // endDate.setDate(endDate.getDate() + 1);
         return await this.graphClient
@@ -114,11 +114,11 @@ class SimpleGraphClient {
             .post({
                 schedules: ['zhang_xinchun@pactera.com'],
                 startTime: {
-                    dateTime: startDate,
+                    dateTime: '2020-02-24T08:21:58.394Z',
                     timeZone: 'Pacific Standard Time'
                 },
                 endTime: {
-                    dateTime: endDate,
+                    dateTime: '2020-02-24T08:21:58.394Z',
                     timeZone: 'Pacific Standard Time'
                 },
                 availabilityViewInterval: 60
