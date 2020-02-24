@@ -106,6 +106,7 @@ class SimpleGraphClient {
     async getSchedule() {
         return await this.graphClient
             .api('/me/calendar/getSchedule')
+            .version('beta')
             .post({
                 schedules: ['zhang_xinchun@pactera.com'],
                 startTime: {

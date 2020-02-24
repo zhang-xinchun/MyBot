@@ -38,15 +38,15 @@ class OAuthHelpers {
 
     static async getSchedule(context, tokenResponse) {
         if (!context) {
-            throw new Error('OAuthHelpers.sendMail(): `context` cannot be undefined.');
+            throw new Error('OAuthHelpers.getSchedule(): `context` cannot be undefined.');
         }
         if (!tokenResponse) {
-            throw new Error('OAuthHelpers.sendMail(): `tokenResponse` cannot be undefined.');
+            throw new Error('OAuthHelpers.getSchedule(): `tokenResponse` cannot be undefined.');
         }
 
         const client = new SimpleGraphClient(tokenResponse.token);
-        await client.getSchedule();
-        await context.sendActivity(`Schedule information ${ 'aaa' }`);
+        var schedule = await client.getSchedule();
+        await context.sendActivity(`Schedule information ${ schedule }`);
     }
 
     /**
@@ -61,7 +61,6 @@ class OAuthHelpers {
         if (!tokenResponse) {
             throw new Error('OAuthHelpers.listMe(): `tokenResponse` cannot be undefined.');
         }
-
         try {
             // Pull in the data from Microsoft Graph.
             const client = new SimpleGraphClient(tokenResponse.token);
