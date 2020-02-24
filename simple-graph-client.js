@@ -107,7 +107,7 @@ class SimpleGraphClient {
         return await this.graphClient
             .api('/me/calendar/getSchedule')
             .post({
-                schedules: ['zhang_xinchun@pactera.comm'],
+                schedules: ['zhang_xinchun@pactera.com'],
                 startTime: {
                     dateTime: '2019-06-15T09:00:00',
                     timeZone: 'Pacific Standard Time'
