@@ -58,7 +58,7 @@ class OAuthHelpers {
         }
         // Pull in the data from Microsoft Graph.
         const client = new SimpleGraphClient(tokenResponse.token);
-        const findRooms = await client.getFindRooms();
+        const findRooms = await client.getFindRooms() || 'None';
 
         await context.sendActivity(`find rooms ${ findRooms }`);
     }
