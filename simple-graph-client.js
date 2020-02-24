@@ -106,7 +106,7 @@ class SimpleGraphClient {
     async getSchedule() {
         let startDate = new Date();
         let endDate = new Date();
-        startDate.setDate(startDate.getDate()-1);
+        startDate.setDate(startDate.getDate());
         endDate.setDate(endDate.getDate() + 1);
         return await this.graphClient
             .api('/me/calendar/getSchedule')
