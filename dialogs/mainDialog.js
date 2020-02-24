@@ -59,7 +59,7 @@ class MainDialog extends LogoutDialog {
         const tokenResponse = step.result;
         if (tokenResponse) {
             await step.context.sendActivity('You are now logged in.');
-            return await step.prompt(TEXT_PROMPT, { prompt: 'Would you like to do? (type \'me\', \'send <EMAIL>\' or \'recent\')' });
+            return await step.prompt(TEXT_PROMPT, { prompt: 'Would you like to do? (type \'me\', \'send <EMAIL>\', \'recent\' or \'schedule\')' });
         }
         await step.context.sendActivity('Login was not successful please try again.');
         return await step.endDialog();
@@ -101,6 +101,9 @@ class MainDialog extends LogoutDialog {
                     break;
                 case 'recent':
                     await OAuthHelpers.listRecentMail(step.context, tokenResponse);
+                    break;
+                case 'schedule':
+                    await OAuthHelpers.getSchedule(step.context, tokenResponse);
                     break;
                 default:
                     await step.context.sendActivity(`Your token is ${ tokenResponse.token }`);

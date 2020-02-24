@@ -102,6 +102,30 @@ class SimpleGraphClient {
                 return res;
             });
     }
+
+    async getSchedule() {
+        return await this.graphClient
+            .api('/me/calendar/getSchedule')
+            .post({
+                schedules: ['zhang_xinchun@pactera.comm'],
+                startTime: {
+                    dateTime: '2019-06-15T09:00:00',
+                    timeZone: 'Pacific Standard Time'
+                },
+                endTime: {
+                    dateTime: '2020-12-15T18:00:00',
+                    timeZone: 'Pacific Standard Time'
+                },
+                availabilityViewInterval: 60
+            }, (error, res) => {
+                if (error) {
+                    throw error;
+                } else {
+                    return res;
+                }
+            });
+    }
+
 }
 
 exports.SimpleGraphClient = SimpleGraphClient;

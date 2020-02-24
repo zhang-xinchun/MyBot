@@ -36,6 +36,19 @@ class OAuthHelpers {
         await context.sendActivity(`I sent a message to ${ emailAddress } from your account.`);
     }
 
+    static async getSchedule(context, tokenResponse) {
+        if (!context) {
+            throw new Error('OAuthHelpers.sendMail(): `context` cannot be undefined.');
+        }
+        if (!tokenResponse) {
+            throw new Error('OAuthHelpers.sendMail(): `tokenResponse` cannot be undefined.');
+        }
+
+        const client = new SimpleGraphClient(tokenResponse.token);
+        const schedule = await client.getSchedule();
+        await context.sendActivity(`Schedule information : ${ schedule }`);
+    }
+
     /**
      * Displays information about the user in the bot.
      * @param {TurnContext} context A TurnContext instance containing all the data needed for processing this conversation turn.
